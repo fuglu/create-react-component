@@ -1,0 +1,32 @@
+{
+  "name": "@fuglu/create-react-component",
+  "version": "1.0.0",
+  "description": "Create React components easily",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fuglu/create-react-component.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Benjamin Kluck <ben@fug.lu> (https://github.com/fuglu)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fuglu/create-react-component/issues"
+  },
+  "homepage": "https://github.com/fuglu/create-react-component#readme",
+  "files": [
+    "index.js",
+    "template"
+  ],
+  "bin": {
+    "create-react-component": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "commander": "^2.9.0",
+    "cross-spawn": "^5.1.0",
+    "fs-extra": "^2.0.0"
+  }
+}
