@@ -28,7 +28,7 @@ validateTemplatePath(program.templatePath);
 createComponent(componentName, program.basePath, program.templatePath, program.scope);
 
 function createComponent(name, basePath, templatePath, scope) {
-	var componentPath = path.resolve(basePath, name);
+	var componentPath = path.join(basePath, name);
 	var scopedComponentName = scope
 		?  '@' + scope + '/' + name
 		: name;
@@ -47,10 +47,10 @@ function createComponent(name, basePath, templatePath, scope) {
 	console.log('');
 	console.log('You might want to edit the component now:');
 	console.log('');
-	console.log('  ' + chalk.cyan('editor ') + componentPath);
+	console.log('  ' + chalk.cyan('cd ') + componentPath);
+	console.log('  ' + chalk.cyan('editor'));
 	console.log('');
 	console.log('Happy hacking!');
-	console.log('');
 }
 
 function validateComponentName(name) {
