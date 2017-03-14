@@ -29,7 +29,7 @@ createComponent(componentName, program.basePath, program.templatePath, program.s
 
 function createComponent(name, basePath, templatePath, scope) {
 	var componentPath = path.resolve(basePath, name);
-	var componentName = scope
+	var scopedComponentName = scope
 		?  '@' + scope + '/' + name
 		: name;
 
@@ -39,11 +39,11 @@ function createComponent(name, basePath, templatePath, scope) {
 
 	createBasePath(basePath);
 	copyTemplate(templatePath, componentPath);
-	renameComponent(name, componentPath, scope);
+	renameComponent(scopedComponentName, componentPath, scope);
 	installDependencies(componentPath);
 
 	console.log('');
-	console.log(chalk.bold('Successfully created ') + chalk.green(componentName) + '.');
+	console.log(chalk.bold('Successfully created ') + chalk.green(scopedComponentName) + '.');
 	console.log('');
 	console.log('You might want to edit the component now:');
 	console.log('');
@@ -95,11 +95,7 @@ function renameComponent(name, componentPath, scope) {
 
 	var packageJson = JSON.parse(fs.readFileSync(packageJsonFile));
 
-	if (scope) {
-		packageJson.name = '@' + scope + '/' + name;
-	} else {
-		packageJson.name = name;
-	}
+	packageJson.name = name;
 
 	fs.writeFileSync(
 		packageJsonFile,
