@@ -23,17 +23,8 @@ var program = commander
 	.option('-t, --template-path <template-path>', 'use your own template directory', path.resolve(__dirname, 'template'))
 	.parse(process.argv);
 
-if (typeof componentName === 'undefined') {
-	console.error('Please specify the component name:');
-	console.error('  ' + chalk.cyan(program.name()) + chalk.green(' <component-name>'));
-	console.error();
-	console.error('For example:');
-	console.error('  ' + chalk.cyan(program.name()) + chalk.green(' my-react-component'));
-	console.error();
-	console.error('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.');
-	process.exit(1);
-}
-
+validateComponentName(componentName);
+validateTemplatePath(program.templatePath);
 createComponent(componentName, program.basePath, program.templatePath, program.scope);
 
 function createComponent(name, basePath, templatePath, scope) {
@@ -60,6 +51,35 @@ function createComponent(name, basePath, templatePath, scope) {
 	console.log('');
 	console.log('Happy hacking!');
 	console.log('');
+}
+
+function validateComponentName(name) {
+	if (typeof name === 'undefined') {
+		console.error('Please specify the component name:');
+		console.error('  ' + chalk.cyan(program.name()) + chalk.green(' <component-name>'));
+		console.error();
+		console.error('For example:');
+		console.error('  ' + chalk.cyan(program.name()) + chalk.green(' my-react-component'));
+		console.error();
+		console.error('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.');
+		process.exit(1);
+	}
+}
+
+function validateTemplatePath(templatePath) {
+	try {
+		var packageJsonFile = path.resolve(templatePath, 'package.json');
+		JSON.parse(fs.readFileSync(packageJsonFile));
+	} catch (e) {
+		console.error('Please specify the template path and make sure the directory contains a valid package.json file:');
+		console.error('  ' + chalk.cyan(program.name()) + ' <component-name>' + chalk.green(' --template-path <template-path>'));
+		console.error();
+		console.error('For example:');
+		console.error('  ' + chalk.cyan(program.name()) + ' my-react-component' + chalk.green(' --template-path my/template/directory'));
+		console.error();
+		console.error('Run ' + chalk.cyan(program.name() + ' --help') + ' to see all options.');
+		process.exit(1);
+	}
 }
 
 function createBasePath(basePath) {
