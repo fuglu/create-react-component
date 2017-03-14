@@ -73,7 +73,7 @@ function copyTemplate(templatePath, componentPath) {
 function renameComponent(name, componentPath, scope) {
 	var packageJsonFile = path.resolve(componentPath, 'package.json');
 
-	var packageJson = require(packageJsonFile);
+	var packageJson = JSON.parse(fs.readFileSync(packageJsonFile));
 
 	if (scope) {
 		packageJson.name = '@' + scope + '/' + name;
