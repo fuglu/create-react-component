@@ -1,5 +1,7 @@
 # Create React Component [![Build Status](https://travis-ci.org/fuglu/create-react-component.svg?branch=master)](https://travis-ci.org/fuglu/create-react-component)
 
+:warning: :warning: :warning: **This project is deprecated. You should use [nwb](https://github.com/insin/nwb) instead.** :warning: :warning: :warning:
+
 Create React components easily.
 
 ## Quick Overview
